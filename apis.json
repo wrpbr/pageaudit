@@ -1,0 +1,75 @@
+{
+  "name": "PageAudit",
+  "description": "Technical SEO audit that ships the fix: title, meta, Open Graph, headings, canonical, JSON-LD, each finding with its patch. Built for agents: MCP and API.",
+  "image": "https://pageaudit.online/icon.svg",
+  "url": "https://pageaudit.online/apis.json",
+  "tags": [
+    "One-shot technical SEO audit",
+    "Fix per finding and a ready-to-apply patch: head tags, robots, sitemap",
+    "Saved tabs per URL",
+    "Shareable report and badge",
+    "Micro-tools for one check at a time",
+    "Agent-first HTTP API with x402 billing",
+    "MCP server for agents"
+  ],
+  "created": "2026-09-05",
+  "modified": "2026-09-06",
+  "specificationVersion": "0.19",
+  "apis": [
+    {
+      "name": "PageAudit",
+      "description": "Technical SEO audit that ships the fix: title, meta, Open Graph, headings, canonical, JSON-LD, each finding with its patch. Built for agents: MCP and API.",
+      "image": "https://pageaudit.online/icon.svg",
+      "humanURL": "https://pageaudit.online/",
+      "baseURL": "https://pageaudit.online/api/",
+      "tags": [
+        "One-shot technical SEO audit",
+        "Fix per finding and a ready-to-apply patch: head tags, robots, sitemap",
+        "Saved tabs per URL",
+        "Shareable report and badge",
+        "Micro-tools for one check at a time",
+        "Agent-first HTTP API with x402 billing",
+        "MCP server for agents"
+      ],
+      "properties": [
+        {
+          "type": "OpenAPI",
+          "url": "https://pageaudit.online/openapi.json"
+        },
+        {
+          "type": "Documentation",
+          "url": "https://pageaudit.online/llms-full.txt"
+        },
+        {
+          "type": "x-llms-txt",
+          "url": "https://pageaudit.online/llms.txt"
+        },
+        {
+          "type": "x-mcp",
+          "url": "https://pageaudit.online/mcp"
+        },
+        {
+          "type": "x-api-catalog",
+          "url": "https://pageaudit.online/.well-known/api-catalog"
+        },
+        {
+          "type": "x-okf",
+          "url": "https://pageaudit.online/okf/index.md"
+        }
+      ],
+      "contact": [
+        {
+          "FN": "PageAudit",
+          "email": "contato@pageaudit.online"
+        }
+      ]
+    }
+  ],
+  "include": [],
+  "maintainers": [
+    {
+      "FN": "PageAudit",
+      "email": "contato@pageaudit.online"
+    }
+  ]
+}
