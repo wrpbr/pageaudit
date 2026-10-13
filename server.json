@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
   "name": "online.pageaudit/pageaudit",
-  "description": "Technical SEO audit with the ready-made fix for each finding. Pay per call via x402 or credit.",
+  "description": "Search, passive security and page-delivery audit with evidence and suggested fixes. Pay per call via x402 or credit.",
   "version": "1.0.0",
   "websiteUrl": "https://pageaudit.online",
   "remotes": [

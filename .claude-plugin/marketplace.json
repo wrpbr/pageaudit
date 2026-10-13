@@ -1,0 +1,16 @@
+{
+  "name": "pageaudit",
+  "description": "Technical SEO audit of a web page that returns the fix: titles, meta, canonical, robots, Open Graph, headings, JSON-LD, security headers and page delivery, with evidence and a ready patch for each finding. Compare a deploy preview with production, keep pages in tabs and watch them daily, through a skill and the remote MCP server.",
+  "owner": {
+    "name": "PageAudit",
+    "email": "contato@pageaudit.online",
+    "url": "https://pageaudit.online"
+  },
+  "plugins": [
+    {
+      "name": "pageaudit",
+      "source": "./",
+      "category": "data"
+    }
+  ]
+}

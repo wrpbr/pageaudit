@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pageaudit": {
+      "type": "http",
+      "url": "https://pageaudit.online/mcp?checkout=site"
+    }
+  }
+}

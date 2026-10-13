@@ -1,84 +1,97 @@
-# PageAudit
+# PageAudit — skill and MCP server for AI agents
 
-> Technical SEO audit that ships the fix. Built for people and agents who build sites.
+<img src="assets/icon.png" alt="PageAudit" width="72" align="right">
 
-**Live:** https://pageaudit.online · **API index:** https://pageaudit.online/api/ · **OpenAPI:** https://pageaudit.online/openapi.json · **MCP server:** https://pageaudit.online/mcp · **Docs for agents:** https://pageaudit.online/llms.txt
+PageAudit checks a web page the way a search engine and a careful reviewer would, and returns the fix. One call
+reads the title, description, canonical, robots rules, Open Graph, headings, structured data (JSON-LD), security
+headers and page delivery, and gives each finding its evidence and a ready change. It can compare a deploy
+preview with production and show only what got worse. This repository packages the PageAudit skill and the
+connection to its remote MCP server for Claude Code, Codex, Cursor and other agents.
 
-## What it does
+**Site:** https://pageaudit.online · **MCP server:** `https://pageaudit.online/mcp?checkout=site` ·
+**Prices:** https://pageaudit.online/pricing · **API docs:** https://pageaudit.online/developers
 
-PageAudit fetches a URL like a crawler and runs 24 deterministic checks — title, meta description, canonical, headings, Open Graph, Twitter cards, JSON-LD, hreflang, images, links, redirects, robots.txt, sitemap — with no LLM in the loop. Each finding comes with the value found, why it matters and how to fix it; the patch endpoint returns the corrected `<head>` plus robots.txt and sitemap.xml as files.
+## What your agent can do
 
-Audits live in tabs you can reopen, share and badge (an SVG score badge for the README of the audited project). Twenty free single-check tools — title, H1, hreflang, links, HTTP status, redirects, robots.txt, Open Graph and more — run the same engine at https://pageaudit.online/tools.
+- Audit a URL in one call: score, findings with evidence, and the raw JSON-LD and response headers.
+- Get the consolidated patch: the `<head>` block to paste, the files to create and templates to fill in.
+- Compare a page with an earlier audit of the same owner, by finding code: what appeared and what disappeared.
+- Keep pages in tabs, re-run them, read their history and watch them daily for regressions.
+- Run a Lighthouse lab test through Google PageSpeed Insights and read the scores.
 
-## Quickstart (no account)
+Try: *"Audit https://example.com and give me the head tags to fix."* or
+*"Compare the preview of this deploy with production and tell me what got worse."*
 
-Audit a page in one call (no token, no account):
+## GitHub Actions
 
-```bash
-curl -s -X POST https://pageaudit.online/api/audit -H 'content-type: application/json' -d '{"url":"https://example.com"}'
+[wrpbr/pageaudit-action](https://github.com/wrpbr/pageaudit-action) audits each deploy preview against
+production and writes what got worse in the job summary. It can fail the job on a regression. Without any YAML,
+the [PageAudit GitHub App](https://github.com/apps/pageaudit-seo-check) puts a `PageAudit` check run on the commit
+of each preview deployment.
+
+## Install
+
+Claude Code, as a plugin with the skill and the MCP server:
+
+```
+/plugin marketplace add wrpbr/pageaudit
+/plugin install pageaudit@pageaudit
 ```
 
-List the single-check tools:
+Any agent that reads Agent Skills (Claude Code, Codex, Cursor, OpenCode and others):
 
 ```bash
-curl -s https://pageaudit.online/api/tools
+npx skills add wrpbr/pageaudit
 ```
 
-Self-described API index:
+Only the MCP server (remote, Streamable HTTP, no key needed to start):
 
 ```bash
-curl -s https://pageaudit.online/api/
+claude mcp add --transport http pageaudit 'https://pageaudit.online/mcp?checkout=site'   # Claude Code
+codex mcp add pageaudit --url 'https://pageaudit.online/mcp?checkout=site'               # Codex
 ```
-
-## MCP server (remote, nothing to install)
-
-Streamable HTTP over the same public API. Every tool is a call on this API; `operationId` in the OpenAPI is the tool name. Server card: `GET https://pageaudit.online/mcp`.
-
-Claude Code:
-
-```bash
-claude mcp add --transport http pageaudit https://pageaudit.online/mcp
-```
-
-Cursor (`.cursor/mcp.json`):
 
 ```json
-{
-  "mcpServers": {
-    "pageaudit": {
-      "url": "https://pageaudit.online/mcp"
-    }
-  }
-}
+{ "mcpServers": { "pageaudit": { "url": "https://pageaudit.online/mcp?checkout=site" } } }
 ```
 
-Main tools: `audit_url`, `get_audit`, `get_patch`, `list_tools`, `get_tool`, `get_badge`, `create_guest`, `list_tabs`, `create_tab`, `run_tab`.
+The JSON above goes in `.cursor/mcp.json` for Cursor and in the MCP settings of most other clients. For the GitHub
+Copilot coding agent, add it in the repository settings, under Copilot → MCP servers, with `"type": "http"` and the
+tools you allow, for example `audit_url` and `get_patch`.
 
-## Pricing
+## Price
 
-**Free.** Ten audits a day, twenty saved tabs and every single-check tool, without an account. Confirm an e-mail and get 90 days without limits.
+Audits have a free daily allowance. The current allowances, the options past them and their prices are at
+https://pageaudit.online/pricing. The daily watch needs an account. Nothing renews automatically. The plugin never
+pays: with `checkout=site`, the MCP server has no purchase tool and no payment argument.
 
-**Paid.** Beyond the free allowance, an agent pays US$ 0.02 per audit and US$ 0.05 per extra saved tab, per request (x402: the server answers HTTP 402 with the payment terms) or from prepaid credit.
+## What the plugin sends
 
-## What it is not
+The skill tells the agent to call the PageAudit API at pageaudit.online. The MCP server also runs at
+pageaudit.online. The URLs you audit go to pageaudit.online over HTTPS, and PageAudit fetches those pages. The
+plugin runs no local program and reads no local file.
 
-It does not crawl your whole site, it does not measure rankings, and it does not guess: every check is a rule you can read on the tool's page.
+## Em português
 
-## Files in this repository
+O PageAudit confere uma página como um buscador e um revisor atento fariam, e devolve a correção: título,
+descrição, canonical, robots, Open Graph, cabeçalhos, JSON-LD, cabeçalhos de segurança e entrega da página, com a
+evidência e a mudança pronta para cada problema. Também compara a prévia de um deploy com a produção e mostra só o
+que piorou. Instale com os comandos acima. Os preços estão em https://pageaudit.online/pricing.
 
-| | |
+## Files
+
+| File | What it is |
 |---|---|
-| `README.md` | this page |
-| `openapi.json` | OpenAPI 3 document; `operationId` = MCP tool name |
-| `llms.txt` | short guide for agents (endpoints, auth, pricing, MCP) |
-| `llms-full.txt` | full reference: params, body, response field by field, errors (when published) |
-| `apis.json` | APIs.json index (APIs.io) |
-| `mcp/server.json` | manifest published in the Official MCP Registry (`online.pageaudit/pageaudit`) |
-| `okf/` | OKF bundle: markdown with front-matter (index, about, API, FAQ) |
-| `examples/` | `curl.sh` and `python.py` with the free calls above |
+| `skills/pageaudit/SKILL.md` | The skill: which tool answers which question, and the rules for limits and payment |
+| `.mcp.json` | The remote MCP server of the plugin |
+| `.claude-plugin/plugin.json` | The plugin manifest |
+| `.claude-plugin/marketplace.json` | Lets Claude Code add this repository as a plugin marketplace |
+| `server.json` | The manifest in the official MCP registry (`online.pageaudit/pageaudit`) |
+| `glama.json` | The maintainer for the Glama MCP directory |
 
-## About this repository
+## License and contact
 
-This repository mirrors the public, machine-readable surfaces of PageAudit as served at https://pageaudit.online: the OpenAPI document, the `llms.txt` guide, the MCP registry manifest, the OKF bundle and the APIs.json index. The product itself is not open source; the mirror exists so the API and the MCP server can be found, read and linked from here. Files are regenerated from the live surfaces (last sync: 2026-09-05); if something here disagrees with the site, the site is right.
-
-Issues and suggestions are welcome here. Contact: contato@pageaudit.online. Author: Wendel ([@wrpbr](https://github.com/wrpbr)).
+The files in this repository are under the MIT-0 license. The PageAudit service is not part of this license: its
+use follows the [terms of use](https://pageaudit.online/terms) and the
+[privacy policy](https://pageaudit.online/privacy). For questions or problems, open an issue here or write to
+contato@pageaudit.online.
