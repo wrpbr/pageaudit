@@ -62,7 +62,7 @@ tools you allow, for example `audit_url` and `get_patch`.
 ## Price
 
 Audits have a free daily allowance. The current allowances, the options past them and their prices are at
-https://pageaudit.online/pricing. The daily watch needs an account. Nothing renews automatically. The plugin never
+https://pageaudit.online/pricing. The daily watch needs an account. Check the renewal conditions before purchase. The plugin never
 pays: with `checkout=site`, the MCP server has no purchase tool and no payment argument.
 
 ## What the plugin sends
