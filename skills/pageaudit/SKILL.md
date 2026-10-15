@@ -28,11 +28,18 @@ its evidence and a suggested change. The report does not certify security or acc
 | `get_audit` | `GET /api/audits/{id}` | Read an audit again, with the ready fix of each finding. No new fetch, no allowance used. |
 | `get_patch` | `GET /api/audits/{id}/patch` | Get the consolidated patch: `<head>` block, files to create and templates. |
 | `create_guest` | `POST /api/guest` | Get the guest token that owns tabs and audits. |
-| `create_tab` | `POST /api/tabs` | Save a page as a tab. |
+| `create_tab` | `POST /api/tabs` | Save a page. Set `queue_audit:false` for monitoring without a page audit. |
 | `list_tabs` | `GET /api/tabs` | List the saved pages and the latest report. |
 | `run_tab` | `POST /api/tabs/{id}/run` | Audit a saved page again. |
 | `tab_history` | `GET /api/tabs/{id}/history` | Read the earlier runs and what changed between them. |
 | `watch_tab` | `PATCH /api/tabs/{id}` | Turn the daily watch on or off (needs an account). |
+| `domain_status` / `check_domain` | `GET/POST /api/tabs/{id}/domain` | Read or refresh registration, contacts, TLS, DNS, CAA, mail policies, certificate issuance and a limited server comparison. |
+| `configure_domain_monitor` | `PUT /api/tabs/{id}/domain/monitor` | Enable or stop monitoring with current rights and revision. |
+| `domain_history` | `GET /api/tabs/{id}/domain/history` | Read private events and notice delivery. |
+| `acknowledge_domain_event` | `POST /api/tabs/{id}/domain/history/{number}/ack` | Mark an expected event without erasing evidence. |
+| `domain_portfolio` | `POST /api/tabs/domain-portfolio` | Read summaries for selected pages in the active organization. |
+| `preview_domain_alerts` / `apply_domain_alerts` | `POST/PATCH /api/tabs/domain-portfolio/alerts` | Review and apply renewal notices for selected domains. |
+| `review_connection` / `connection_review` / `cancel_connection_review` | `POST/GET/DELETE /api/tabs/{id}/domain/tls` | Start, read or cancel a bounded TLS review. |
 | `lab_test` | `POST /api/audits/{id}/lab` | Start a Lighthouse test through Google PageSpeed Insights. |
 | `lab_result` | `GET /api/audits/{id}/lab` | Read the lab scores and metrics when the test ends. |
 | `list_tools` | `GET /api/tools` | List the single-check tools (title, meta, canonical, Open Graph, JSON-LD…). |
@@ -68,4 +75,12 @@ curl -s -XPOST https://pageaudit.online/api/audit -H 'content-type: application/
 ## Limits
 
 - PageAudit reads the HTML the server sends (up to 2 MB) and does not run the page's JavaScript.
+- Domain settings, contacts and history require the account session and current organization.
+  Writes require CSRF. A stale revision or portfolio preview changes nothing.
+- Certificate issuance uses a 30-day lookup by primary domain, with explicit collection gaps.
+  Issuance does not prove installation. A discovered name never activates monitoring or billing by itself.
+- The server comparison samples two DNS servers and one address of each IP family.
+  Other CDN locations are outside this sample. Contact history exposes field changes, never personal values.
+- TLS reviews use testssl.sh 3.2.4 with a 170-second limit and at most three starts per account per UTC day.
+  Reports expire after 26 hours. Partial results do not establish safety.
 - Terms: https://pageaudit.online/terms. Privacy: https://pageaudit.online/privacy. Contact: contato@pageaudit.online.
