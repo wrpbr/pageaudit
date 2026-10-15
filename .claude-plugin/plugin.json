@@ -1,7 +1,7 @@
 {
   "name": "pageaudit",
   "displayName": "PageAudit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Technical SEO audit of a web page that returns the fix: titles, meta, canonical, robots, Open Graph, headings, JSON-LD, security headers and page delivery, with evidence and a ready patch for each finding. Compare a deploy preview with production, keep pages in tabs and watch them daily, through a skill and the remote MCP server.",
   "author": {
     "name": "PageAudit",

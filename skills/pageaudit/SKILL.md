@@ -12,8 +12,8 @@ its evidence and a suggested change. The report does not certify security or acc
 
 ## Connect
 
-- MCP server (preferred): `https://pageaudit.online/mcp?checkout=site`. Transport: Streamable HTTP. With
-  `checkout=site`, the person buys on the site and the agent never pays.
+- MCP server (preferred): `https://pageaudit.online/mcp?checkout=site`. Transport: Streamable HTTP. Every MCP tool is
+  free, within its free limits: no payment.
 - HTTP API: base URL `https://pageaudit.online`. Each MCP tool calls one route of this API.
 - Identity: `create_guest` returns a guest token `pa_…`. Send it as `guest_token` (or `X-Guest-Token`) so the
   audits are tied to it and can be read again and compared.
@@ -36,14 +36,13 @@ its evidence and a suggested change. The report does not certify security or acc
 | `lab_test` | `POST /api/audits/{id}/lab` | Start a Lighthouse test through Google PageSpeed Insights. |
 | `lab_result` | `GET /api/audits/{id}/lab` | Read the lab scores and metrics when the test ends. |
 | `list_tools` | `GET /api/tools` | List the single-check tools (title, meta, canonical, Open Graph, JSON-LD…). |
-| `billing` | `GET /api/billing` | Read the free allowances, options and prices. |
-| `pricing` | `GET /api/pricing` | Read the current prices. |
 
 ## Rules
 
-1. Read `billing` before many audits in a row. Do not use a price or an allowance from memory.
-2. Never pay by yourself. If a call returns HTTP 402, show the price and https://pageaudit.online/pricing to the
-   user. The person buys on the site.
+1. If an MCP tool answers `free_limit`, tell the user that the free limit for that action is used up. Do not use an
+   allowance from memory; on the HTTP API, `GET /api/billing` reads the free allowances.
+2. Never pay by yourself. On the HTTP API, a paid route returns HTTP 402: show the price and
+   https://pageaudit.online/pricing to the user. The person buys on the site.
 3. To compare a preview with production: audit production with a guest token, then audit the preview with the same
    token and `compare_with` set to the production audit ID. Report `comparison.broke` first.
 4. A finding is identified by its `code`. The message carries the measured value and changes between runs.
