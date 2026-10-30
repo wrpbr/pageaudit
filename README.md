@@ -2,9 +2,9 @@
 
 <img src="assets/icon.png" alt="PageAudit" width="72" align="right">
 
-PageAudit checks a web page the way a search engine and a careful reviewer would, and returns the fix. One call
+PageAudit checks a web page and returns evidence with suggested changes. One call
 reads the title, description, canonical, robots rules, Open Graph, headings, structured data (JSON-LD), security
-headers and page delivery, and gives each finding its evidence and a ready change. It can compare a deploy
+headers and page delivery. It can compare a deploy
 preview with production and show only what got worse. This repository packages the PageAudit skill and the
 connection to its remote MCP server for Claude Code, Codex, Cursor and other agents.
 
@@ -14,7 +14,7 @@ connection to its remote MCP server for Claude Code, Codex, Cursor and other age
 ## What your agent can do
 
 - Audit a URL in one call: score, findings with evidence, and the raw JSON-LD and response headers.
-- Get the consolidated patch: the `<head>` block to paste, the files to create and templates to fill in.
+- Request a correction prompt with evidence, suggested changes and verification steps.
 - Compare a page with an earlier audit of the same owner, by finding code: what appeared and what disappeared.
 - Keep pages in tabs, re-run them, read their history and watch them daily for regressions.
 - Run a Lighthouse lab test through Google PageSpeed Insights and read the scores.
@@ -57,7 +57,7 @@ codex mcp add pageaudit --url 'https://pageaudit.online/mcp?checkout=site'      
 
 The JSON above goes in `.cursor/mcp.json` for Cursor and in the MCP settings of most other clients. For the GitHub
 Copilot coding agent, add it in the repository settings, under Copilot → MCP servers, with `"type": "http"` and the
-tools you allow, for example `audit_url` and `get_patch`.
+tools you allow, for example `audit_url` and `generate_fix_prompt`.
 
 ## Price
 
@@ -75,7 +75,7 @@ plugin runs no local program and reads no local file.
 
 O PageAudit confere uma página como um buscador e um revisor atento fariam, e devolve a correção: título,
 descrição, canonical, robots, Open Graph, cabeçalhos, JSON-LD, cabeçalhos de segurança e entrega da página, com a
-evidência e a mudança pronta para cada problema. Também compara a prévia de um deploy com a produção e mostra só o
+evidência e a mudança sugerida para cada problema. Também compara a prévia de um deploy com a produção e mostra só o
 que piorou. Instale com os comandos acima. Os preços estão em https://pageaudit.online/pricing.
 
 ## Files
