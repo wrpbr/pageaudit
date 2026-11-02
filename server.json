@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
   "name": "online.pageaudit/pageaudit",
-  "description": "Technical SEO, passive security and page-delivery audits with evidence and suggested fixes.",
+  "description": "Find HTML SEO issues, then get an agent fix prompt. Free audits; paid prompts and monitoring.",
   "version": "1.0.1",
   "repository": { "url": "https://github.com/wrpbr/pageaudit", "source": "github" },
   "websiteUrl": "https://pageaudit.online",
