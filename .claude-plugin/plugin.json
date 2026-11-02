@@ -1,7 +1,7 @@
 {
   "name": "pageaudit",
   "displayName": "PageAudit",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Check search visibility, passive security and page delivery with evidence and suggested changes. Compare saved results, request correction prompts and configure monitoring through a skill and the remote MCP server.",
   "author": {
     "name": "PageAudit",

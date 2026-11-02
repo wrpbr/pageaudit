@@ -31,6 +31,7 @@ If free findings already give enough context, use them directly.
 Keep the same UUID `request_id` and body after a delivery failure.
 Reopen saved prompts without generating or paying again.
 Preserve the complete prompt and its license; apply it only to `license.domain`.
+Use its saved resource samples to locate files; samples can be incomplete.
 Review placeholders, apply authorized changes and audit again.
 A prompt does not authorize access, deployment or infrastructure changes.
 
