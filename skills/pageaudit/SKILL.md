@@ -25,6 +25,7 @@ Read saved prompts before generating another.
 Use `prompt_allowance` and `generate_fix_prompt` for one finding or the full audit.
 The initial allowance has three units: one per finding or three for the full report.
 After that, compare credit with current plan inclusions.
+Outside free or plan rights, the full credit price is `unit_price_usd` times `full_units` from the allowance.
 If free findings already give enough context, use them directly.
 
 Keep the same UUID `request_id` and body after a delivery failure.
