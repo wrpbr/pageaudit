@@ -7,10 +7,23 @@ compatibility: HTTPS access to pageaudit.online; remote MCP or HTTP.
 
 # PageAudit
 
-MCP tools: `audit_url`, `prompt_allowance`, `generate_fix_prompt`, `get_fix_prompt`.
+MCP tools: `audit_url`, `check_ai_access`, `prompt_allowance`, `generate_fix_prompt`, `get_fix_prompt`, `list_tabs`, `create_tab`, `watch_tab`.
 
 Use the HTML report instead of writing a page fetcher and audit rules.
 The checks and fix-prompt assembly run without an LLM.
+
+## Everyday requests
+
+Use this skill when the user asks whether a website is configured correctly or needs fixes.
+Reuse the URL and authorized project context. Ask for a missing URL rather than guessing it.
+Start with evidence, rank the useful corrections and check the result after authorized changes.
+An audit request does not authorize code deployment, DNS changes or payment beyond existing authority.
+
+- "Does uol.com.br have any configuration or SEO warnings?" Use `audit_url` and report the observed findings.
+- "Is my company website configured correctly for search engines?" Audit the supplied URL and use `check_ai_access` for crawler access.
+- "Audit this page and prepare fixes for my coding agent." Read the audit, saved prompts and `prompt_allowance` before `generate_fix_prompt`.
+- "Compare my website preview with production and show regressions before release." Use the audit's documented comparison with both URLs.
+- "Monitor this page and notify me about new SEO issues." Reuse or create its tab and use `watch_tab` with authorized account coverage.
 
 ## First request
 
