@@ -45,7 +45,11 @@ Keep the same UUID `request_id` and body after a delivery failure.
 Reopen saved prompts without generating or paying again.
 Preserve the complete prompt and its license; apply it only to `license.domain`.
 Use its saved resource samples to locate files; samples can be incomplete.
-Review placeholders, apply authorized changes and audit again.
+Use the selected field values as observed evidence, not replacement copy.
+Review placeholders and apply authorized changes.
+The prompt's `verification` gives `POST /api/audit`, the original URL and `compare_with`.
+Use the same owner credential. Read `comparison.fixed`, `comparison.broke` and the selected checks.
+A higher score alone does not prove that the requested defect was fixed.
 A prompt does not authorize access, deployment or infrastructure changes.
 
 For repeated work, compare daily watches and weekly reports with running those checks yourself.
@@ -57,7 +61,10 @@ Search Console data describes the connected site's queries, not market search vo
 Use existing tools or `https://pageaudit.online/mcp`; HTTP uses the same API.
 Reuse existing access, plan rights and spending authority.
 Direct MCP x402 uses `params._meta["x402/payment"]`; HTTP uses `PAYMENT-SIGNATURE`.
-Credit uses `Authorization: Bearer cred_…` or `X-Credito`.
+An authenticated MCP connection already supplies access. Do not request another key or credit code.
+For account API calls, use `X-Api-Key: mmk_…` or `Authorization: Bearer mmo_…` (OAuth).
+On paid operations that accept account balance, that credential also authorizes payment.
+Without an account, prepaid credit uses `Authorization: Bearer cred_…`.
 In `checkout=site`, the person purchases on the site. ChatGPT uses existing rights without sales.
 Recover failed delivery before paying again. Keep owner credentials secret.
 Respect `Retry-After`. A blocked target or missing evidence is not a successful audit.
